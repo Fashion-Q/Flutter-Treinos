@@ -38,12 +38,11 @@ class Repositorio {
         title: mapa["title"] ?? "No info",
         description: mapa["description"] ?? "No info",
         price: mapa["price"] ?? -1.0,
-        discountPercent: mapa["discountPercent"] ?? 0.0,
+        discountPercentage: mapa["discountPercentage"] ?? 0.0,
         rating: mapa["rating"] ?? 0.0,
         stock: mapa["stock"] ?? 0,
         brand: mapa["brand"] ?? "No info",
         category: mapa["category"] ?? "No info",
-        smartphones: mapa["smartphones"] ?? "No info",
         thumbnail: mapa["thumbnail"] ?? "No info",
         images: mapa["images"] ?? ["No info"]);
   }

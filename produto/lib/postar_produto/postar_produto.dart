@@ -52,6 +52,7 @@ class _Postar extends State<PostarProduto> {
               ),
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Padding(
                   padding: EdgeInsets.only(left: 10, right: 10),
@@ -70,6 +71,7 @@ class _Postar extends State<PostarProduto> {
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Padding(
                     padding: EdgeInsets.only(left: 10, right: 10),
@@ -89,6 +91,7 @@ class _Postar extends State<PostarProduto> {
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Padding(
                     padding: EdgeInsets.only(left: 10, right: 10),

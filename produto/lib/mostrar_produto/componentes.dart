@@ -13,25 +13,25 @@ class Componentes {
         child: ListView(
           children: [
             getRow("id: ", model.id.toString()),
-            getRow("title: ", model.title),
-            getRow("description: ", model.description),
+            getRow("title: ", model.title!),
+            getRow("description: ", model.description!),
             getRow("price: ", "${model.price.toString()} \$"),
-            getRow("discountPercent: ", "${model.discountPercent.toString()} %"),
+            getRow("discountPercent: ", "${model.discountPercentage.toString()} %"),
             getRow("rating: ", model.rating.toString()),
             getRow("stock: ", model.stock.toString()),
-            getRow("brand: ", model.brand),
-            getRow("category: ", model.category),
-            getRow("smartphones: ", model.smartphones),
-            getRow("thumbnail: ", model.thumbnail),
-            model.images.isEmpty
+            getRow("brand: ", model.brand!),
+            getRow("category: ", model.category!),
+            getRow("thumbnail: ", model.thumbnail!),
+            model.images!.isEmpty
                 ? getRow("images: ", "No info")
                 : Padding(
-                  padding: const EdgeInsets.only(left: 10,top: 3,bottom: 3),
-                  child: SizedBox(
-                      height: 80,
-                      width: width,
-                      child: getImages(model),
-                    ),
+                  padding: const EdgeInsets.only(left: 10,top: 3,bottom: 3, right: 10),
+                  child: Container(
+                    color: Colors.lightBlue,
+                    height: 80,
+                    width: width,
+                    child: getImages(model),
+                  ),
                 )
           ],
         ),
@@ -41,9 +41,9 @@ class Componentes {
 
   Widget getImages(Modelo model) {
     return ListView.builder(
-      itemCount: model.images.length,
+      itemCount: model.images!.length,
       itemBuilder: (BuildContext context, int index) {
-        return Text("Image$index: ${model.images[index]}");
+        return Text("Image$index: ${model.images![index]}");
       },
     );
   }

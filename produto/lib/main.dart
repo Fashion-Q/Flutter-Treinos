@@ -81,9 +81,9 @@ class _MyHomePageState extends State<MyHomePage> {
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const PostarProduto()));
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const PostarProduto()));
                 },
                 child: const Text("Post new Product"),
               ),
@@ -107,9 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(240, 129, 128, 128),
                 ),
-                onPressed: () {
-                  
-                },
+                onPressed: () {},
                 child: const Text("Change Product"),
               ),
             ),
