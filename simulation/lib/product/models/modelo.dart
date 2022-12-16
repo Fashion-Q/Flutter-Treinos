@@ -1,15 +1,15 @@
 class Modelo {
- int? id;
- String? title;
- String? description;
- double? price;
- double? discountPercentage;
- double? rating;
- int? stock;
- String? brand;
- String? category;
- String? thumbnail;
- List<dynamic>? images;
+  int? id;
+  String? title;
+  String? description;
+  double? price;
+  double? discountPercentage;
+  double? rating;
+  int? stock;
+  String? brand;
+  String? category;
+  String? thumbnail;
+  List<dynamic>? images;
 
   Modelo(
       {this.id,
@@ -38,6 +38,8 @@ class Modelo {
     images = json['images'] ?? ["Sem info"];
   }
 
+  
+
   Map<String, dynamic> toJson() => {
         "id": id,
         "title": title,
@@ -51,17 +53,31 @@ class Modelo {
         "thumbnail": thumbnail,
         "images": images
       };
-// final int id;
-//   final String title;
-//   final String description;
-//   final double price;
-//   final double discountPercent;
-//   final double rating;
-//   final int stock;
-//   final String brand;
-//   final String category;
-//   final String smartphones;
-//   final String thumbnail;
-//   final List<dynamic> images;
+
+  List<String> toKey() => [
+    "id",
+    "title",
+    "description",
+    "price",
+    "discountPercentage",
+    "rating",
+    "stock",
+    "brand",
+    "category",
+    "thumbnail",
+    "images"
+  ];
+
+// int? id;
+// String? title;
+// String? description;
+// double? price;
+// double? discountPercentage;
+// double? rating;
+// int? stock;
+// String? brand;
+// String? category;
+// String? thumbnail;
+// List<dynamic>? images;
 
 }

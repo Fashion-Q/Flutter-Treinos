@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import 'repositorio.dart';
 import 'componentes.dart';
+
 class DeletarProduto extends StatefulWidget {
   const DeletarProduto({super.key});
 
@@ -16,6 +17,7 @@ class _Deletar extends State<DeletarProduto> {
   int n = 0;
   String snackBar = "";
   bool loadingProgress = false;
+  bool clickButton = true;
 
   @override
   Widget build(BuildContext context) {
@@ -66,22 +68,28 @@ class _Deletar extends State<DeletarProduto> {
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                 onPressed: () async {
-                  setState(() {
-                    loadingProgress = true;
-                  });
-                  snackBar = await rep.deletar(n)
-                      ? "Deletado com sucesso!"
-                      : "Não foi deletado D:";
+                  if (clickButton) {
+                    clickButton = false;
+                    setState(() {
+                      loadingProgress = true;
+                    });
+                    snackBar = await rep.deletar(n)
+                        ? "Deletado com sucesso!"
+                        : "Não foi deletado D:";
 
-                  // ignore: use_build_context_synchronously
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(snackBar),
-                    ),
-                  );
-                  setState(() {
-                    loadingProgress = false;
-                  });
+                    // ignore: use_build_context_synchronously
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(snackBar),
+                      ),
+                    );
+                    setState(() {
+                      loadingProgress = false;
+                    });
+                    Future.delayed(const Duration(milliseconds: 5000), () {
+                      clickButton = true;
+                    });
+                  }
                 },
                 child: const Text("Deletar"),
               ),

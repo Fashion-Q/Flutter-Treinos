@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'deletar_produto/deletar_produto.dart';
 import 'models/modelo.dart';
-import 'postar_produto/postar_produto.dart';
-import 'repositorio.dart';
+import 'show_all_product.dart/repositorio.dart';
 
 class Product extends StatefulWidget {
   const Product({super.key});
@@ -46,10 +44,7 @@ class _ProductState extends State<Product> {
               width: 200,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const PostarProduto()));
+                  Navigator.pushNamed(context, "PostNewProduct");
                 },
                 child: const Text("Post new Product"),
               ),
@@ -59,10 +54,7 @@ class _ProductState extends State<Product> {
               child: ElevatedButton(
                 onPressed: () {
                   // repositorio.deletarProduto();
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const DeletarProduto()));
+                  Navigator.pushNamed(context, "DeletarProduto");
                 },
                 child: const Text("Delet Product"),
               ),

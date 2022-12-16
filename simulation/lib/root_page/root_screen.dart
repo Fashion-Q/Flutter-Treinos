@@ -10,34 +10,30 @@ class RootScreen extends StatelessWidget {
     return Scaffold(
       drawer: RootController.controller.comp.getDrawer(size),
       body: SingleChildScrollView(
-        child: SizedBox(
-          width: size.width,
-          height: size.height,
-          child: Column(
-            children: [
-              size.width < 450
-              ? RootController.controller.comp.getAppBar()
-              : const SizedBox(width: 0,height: 0),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, "cep");
-                  },
-                  child: const Text("CEP Simulation"),
-                ),
+        child: Column(
+          children: [
+            size.width < 450
+            ? RootController.controller.comp.getAppBar()
+            : const SizedBox(width: 0,height: 0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, "cep");
+                },
+                child: const Text("CEP Simulation"),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, "product");
-                  },
-                  child: const Text("Product Simulation"),
-                ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, "product");
+                },
+                child: const Text("Product Simulation"),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
