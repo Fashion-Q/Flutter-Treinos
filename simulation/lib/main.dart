@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simulation/cep/cep_screen.dart';
+import 'package:simulation/level_up/look_out.dart';
 import 'package:simulation/product/deletar_produto/deletar_produto.dart';
 import 'package:simulation/product/postar_produto/postar_produto.dart';
 import 'package:simulation/product/show_all_product.dart/mostrar_produto.dart';
@@ -34,6 +35,7 @@ class Root extends StatelessWidget {
           "mostrarProdutos" :(context) => const MostrarProduto(),
           "PostNewProduct" :(context) => const PostarProduto(),
           "DeletarProduto" :(context) => const DeletarProduto(),
+          "lookout" :(context) => const Lookout(),
 
         },
       ),

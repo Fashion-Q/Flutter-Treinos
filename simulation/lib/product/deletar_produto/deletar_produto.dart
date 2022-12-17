@@ -73,10 +73,13 @@ class _Deletar extends State<DeletarProduto> {
                     setState(() {
                       loadingProgress = true;
                     });
-                    snackBar = await rep.deletar(n)
-                        ? "Deletado com sucesso!"
-                        : "Não foi deletado D:";
-
+                    try {
+                      snackBar = await rep.deletar(n)
+                          ? "Deletado com sucesso!"
+                          : "Não foi deletado D:";
+                    } on Exception catch (e) {
+                      snackBar = "Algo inesperado";
+                    }
                     // ignore: use_build_context_synchronously
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
