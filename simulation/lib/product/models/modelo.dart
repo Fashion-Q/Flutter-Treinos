@@ -28,9 +28,9 @@ class Modelo {
     id = json['id'] ?? 0;
     title = json['title'] ?? "Sem info";
     description = json['description'] ?? "Sem info";
-    price = json['price'] ?? 0.0;
-    discountPercentage = json['discountPercentage'] ?? "Sem info";
-    rating = json['rating'] ?? 0.0;
+    price = checkDouble(json['price'] ?? 0.0);
+    discountPercentage = checkDouble(json['discountPercentage'] ?? 0.0);
+    rating = checkDouble(json['rating'] ?? 0.0);
     stock = json['stock'] ?? 0.0;
     brand = json['brand'] ?? "Sem info";
     category = json['category'] ?? "Sem info";
@@ -38,7 +38,9 @@ class Modelo {
     images = json['images'] ?? ["Sem info"];
   }
 
-  
+  double checkDouble(dynamic check) {
+    return double.parse(check.toString());
+  }
 
   Map<String, dynamic> toJson() => {
         "id": id,
@@ -55,18 +57,18 @@ class Modelo {
       };
 
   List<String> toKey() => [
-    "id",
-    "title",
-    "description",
-    "price",
-    "discountPercentage",
-    "rating",
-    "stock",
-    "brand",
-    "category",
-    "thumbnail",
-    "images"
-  ];
+        "id",
+        "title",
+        "description",
+        "price",
+        "discountPercentage",
+        "rating",
+        "stock",
+        "brand",
+        "category",
+        "thumbnail",
+        "images"
+      ];
 
 // int? id;
 // String? title;

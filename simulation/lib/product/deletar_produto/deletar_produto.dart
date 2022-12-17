@@ -77,7 +77,7 @@ class _Deletar extends State<DeletarProduto> {
                       snackBar = await rep.deletar(n)
                           ? "Deletado com sucesso!"
                           : "Não foi deletado D:";
-                    } on Exception catch (e) {
+                    } on Exception {
                       snackBar = "Algo inesperado";
                     }
                     // ignore: use_build_context_synchronously
