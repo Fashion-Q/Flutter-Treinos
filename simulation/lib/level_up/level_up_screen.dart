@@ -8,16 +8,26 @@ class LevelUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    controller.setSize(MediaQuery.of(context).size);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Level up"),
         centerTitle: true,
       ),
-      body: Column(children: controller.task.levelUp),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Column(
+              children: controller.levelUp,
+            ),
+            const SizedBox(
+              height: 80,
+            )
+          ],
+        ),
+      ),
       floatingActionButton: OutlinedButton(
         onPressed: () {
-          controller.inicio();
+          Navigator.pushNamed(context, "addTask");
         },
         child: const Text("Adicionar uma nova tarefa!"),
       ),

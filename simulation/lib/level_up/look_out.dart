@@ -18,6 +18,7 @@ class Look extends State<Lookout> {
   void initState() {
     super.initState();
     controller = LookController();
+    controller.inicio();
   }
 
   @override

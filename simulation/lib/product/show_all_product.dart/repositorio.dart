@@ -66,8 +66,7 @@ class Repositorio {
                 value,
                 errorBuilder: (BuildContext context,
                     Object exception,
-                    // ignore: avoid_types_as_parameter_names, non_constant_identifier_names
-                    StackTrace) {
+                    StackTrace? stackTrace) {
                   return Image.asset("assets/imagens/product/nophoto.png");
                 },
               ),

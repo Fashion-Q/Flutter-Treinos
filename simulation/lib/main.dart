@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simulation/cep/cep_screen.dart';
+import 'package:simulation/level_up/add_task.dart';
 import 'package:simulation/level_up/look_out.dart';
 import 'package:simulation/product/deletar_produto/deletar_produto.dart';
 import 'package:simulation/product/postar_produto/postar_produto.dart';
@@ -27,7 +28,7 @@ class Root extends StatelessWidget {
           ? Brightness.dark
           : Brightness.light
         ),
-        initialRoute: "home",
+        initialRoute: "lookout",
         routes: {
           "home" :(context) => RootScreen(),
           "cep" :(context) => const Cep(),
@@ -36,7 +37,7 @@ class Root extends StatelessWidget {
           "PostNewProduct" :(context) => const PostarProduto(),
           "DeletarProduto" :(context) => const DeletarProduto(),
           "lookout" :(context) => const Lookout(),
-
+          "addTask" :(context) => const AddTask(),
         },
       ),
     );
