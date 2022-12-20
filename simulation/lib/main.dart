@@ -6,6 +6,7 @@ import 'package:simulation/product/deletar_produto/deletar_produto.dart';
 import 'package:simulation/product/postar_produto/postar_produto.dart';
 import 'package:simulation/product/show_all_product.dart/mostrar_produto.dart';
 import 'package:simulation/product/product_home.dart';
+import 'package:simulation/repository/repository_prefes_sheared.dart';
 import 'package:simulation/root_page/root_controller.dart';
 import 'package:simulation/root_page/root_screen.dart';
 
@@ -37,7 +38,7 @@ class Root extends StatelessWidget {
           "PostNewProduct" :(context) => const PostarProduto(),
           "DeletarProduto" :(context) => const DeletarProduto(),
           "lookout" :(context) => const Lookout(),
-          "addTask" :(context) => const AddTask(),
+          "addTask" :(context) => AddTask(repository: RepositoryPrefsSheared()),
         },
       ),
     );

@@ -25,12 +25,30 @@ class LevelUpScreen extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: OutlinedButton(
-        onPressed: () {
-          Navigator.pushNamed(context, "addTask");
-        },
-        child: const Text("Adicionar uma nova tarefa!"),
-      ),
+      floatingActionButton:
+          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+        const SizedBox(
+          width: 20,
+        ),
+        OutlinedButton(
+          onPressed: () {
+            controller.loadTarefas();
+          },
+          child: const Text("Atualizar"),
+        ),
+        OutlinedButton(
+          onPressed: () {
+            controller.saveTask();
+          },
+          child: const Text("Salvar"),
+        ),
+        OutlinedButton(
+          onPressed: () {
+            Navigator.pushNamed(context, "addTask");
+          },
+          child: const Text("Adicionar tarefa!"),
+        ),
+      ]),
     );
   }
 }

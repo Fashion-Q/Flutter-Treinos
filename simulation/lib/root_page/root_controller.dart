@@ -11,4 +11,8 @@ class RootController extends ChangeNotifier {
     boolDarkTheme = !boolDarkTheme;
     notifyListeners();
   }
+
+  void justNorifyer() {
+    notifyListeners();
+  }
 }

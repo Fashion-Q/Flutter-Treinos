@@ -4,17 +4,24 @@ class MyTask extends StatefulWidget {
   final String nome;
   final int lv;
   final String url;
+  final double progress;
+  final int indexProgress;
   const MyTask(
-      {required this.nome, required this.lv, required this.url, super.key});
+      {required this.nome,
+      required this.lv,
+      required this.url,
+      required this.progress,
+      required this.indexProgress,
+      super.key});
 
   @override
   State<MyTask> createState() => Task();
 }
 
 class Task extends State<MyTask> {
-  double progress = 0;
-  int indexProgress = 0;
-  List<Widget> star = [];
+  late double progress = widget.progress;
+  late int indexProgress = widget.indexProgress;
+  late List<Widget> star = [];
   List<BoxDecoration> decoration = [
     const BoxDecoration(
         gradient: LinearGradient(colors: [
@@ -59,7 +66,7 @@ class Task extends State<MyTask> {
             height: 20,
           ),
           Container(
-            width: size.width * 0.9,
+            width: size.width * 0.95,
             //Color.fromARGB(70, 141, 181, 255)
             decoration: const BoxDecoration(
               color: Color.fromARGB(70, 205, 144, 31),
@@ -71,15 +78,15 @@ class Task extends State<MyTask> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  width: size.width * 0.2,
-                  height: (size.width * 0.2) * 1.25,
+                  width: size.width * 0.3,
+                  height: (size.width * 0.3) * 1.25,
                   color: const Color.fromARGB(255, 233, 233, 233),
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(16),
                       child: Image.network(widget.url, fit: BoxFit.cover,
-                          errorBuilder: (BuildContext context,Object error,StackTrace? stackTrace) {
-                        return Image.asset(
-                            "assets/imagens/lv_up/nophoto.png");
+                          errorBuilder: (BuildContext context, Object error,
+                              StackTrace? stackTrace) {
+                        return Image.asset("assets/imagens/lv_up/nophoto.png");
                       })),
                 ),
                 SizedBox(
@@ -92,7 +99,7 @@ class Task extends State<MyTask> {
                             widget.nome,
                             textAlign: TextAlign.center,
                             style: const TextStyle(
-                                overflow: TextOverflow.ellipsis,fontSize: 20),
+                                overflow: TextOverflow.ellipsis, fontSize: 20),
                           ),
                         ),
                         SizedBox(
@@ -133,7 +140,7 @@ class Task extends State<MyTask> {
           ),
           Container(
             decoration: decoration[indexProgress],
-            width: size.width * 0.9,
+            width: size.width * 0.95,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

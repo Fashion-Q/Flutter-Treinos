@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:simulation/level_up/look_controller.dart';
 import 'package:simulation/level_up/level_up_screen.dart';
+import 'package:simulation/repository/repository.dart';
+import 'package:simulation/repository/repository_prefes_sheared.dart';
 
 class Lookout extends StatefulWidget {
   const Lookout({super.key});
@@ -17,8 +19,10 @@ class Look extends State<Lookout> {
   @override
   void initState() {
     super.initState();
-    controller = LookController();
-    controller.inicio();
+    Repository rep = RepositoryPrefsSheared();
+    controller = LookController(repository: rep);
+    controller.loadTarefas();
+    //controller.inicio();
   }
 
   @override
