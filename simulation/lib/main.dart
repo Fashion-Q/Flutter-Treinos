@@ -29,9 +29,9 @@ class Root extends StatelessWidget {
           ? Brightness.dark
           : Brightness.light
         ),
-        initialRoute: "lookout",
+        initialRoute: "home",
         routes: {
-          "home" :(context) => RootScreen(),
+          "home" :(context) => RootScreen(),//Se colocar const a animação do botão de escurever/amanhecer do thema não vai funcionar
           "cep" :(context) => const Cep(),
           "product" :(context) => const Product(),
           "mostrarProdutos" :(context) => const MostrarProduto(),

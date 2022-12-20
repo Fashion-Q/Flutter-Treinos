@@ -21,8 +21,8 @@ class Look extends State<Lookout> {
     super.initState();
     Repository rep = RepositoryPrefsSheared();
     controller = LookController(repository: rep);
+    controller.inicio();
     controller.loadTarefas();
-    //controller.inicio();
   }
 
   @override

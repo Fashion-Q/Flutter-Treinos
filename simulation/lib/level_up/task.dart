@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:simulation/repository/repository.dart';
 
 class MyTask extends StatefulWidget {
+  final int id;
   final String nome;
   final int lv;
   final String url;
   final double progress;
   final int indexProgress;
+  final Repository repository;
   const MyTask(
-      {required this.nome,
+      {required this.repository,
+      required this.id,
+      required this.nome,
       required this.lv,
       required this.url,
       required this.progress,
@@ -22,6 +27,11 @@ class Task extends State<MyTask> {
   late double progress = widget.progress;
   late int indexProgress = widget.indexProgress;
   late List<Widget> star = [];
+  bool salvarTarefa = false;
+  bool uparTarefa = true;
+  bool deletarTarefa = true;
+  Color colorDel = Colors.blue;
+
   List<BoxDecoration> decoration = [
     const BoxDecoration(
         gradient: LinearGradient(colors: [
@@ -42,6 +52,10 @@ class Task extends State<MyTask> {
       Colors.red,
     ])),
   ];
+
+  double checkLv() {
+    return progress / widget.lv / (2 * widget.lv * (indexProgress + 1) * 5);
+  }
 
   @override
   void initState() {
@@ -90,49 +104,124 @@ class Task extends State<MyTask> {
                       })),
                 ),
                 SizedBox(
-                    width: size.width * 0.5,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          width: size.width * 0.5,
-                          child: Text(
-                            widget.nome,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                                overflow: TextOverflow.ellipsis, fontSize: 20),
-                          ),
+                  width: size.width * 0.5,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        width: size.width * 0.5,
+                        child: Text(
+                          widget.nome,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              overflow: TextOverflow.fade, fontSize: 20),
                         ),
-                        SizedBox(
-                          height: size.width * 0.02,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: star,
-                        ),
-                      ],
-                    )),
+                      ),
+                      SizedBox(
+                        height: size.width * 0.02,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: star,
+                      ),
+                    ],
+                  ),
+                ),
                 SizedBox(
                   width: size.width * 0.15,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (progress /
-                              widget.lv /
-                              (2 * widget.lv * ((indexProgress + 1) * 5)) <
-                          1.0) {
-                        progress++;
-                        setState(() {});
-                      } else if (indexProgress < 2) {
-                        indexProgress++;
-                        progress = 0;
-                        setState(() {});
-                      }
-                    },
-                    child: Column(
-                      children: const [
-                        Icon(Icons.arrow_drop_up),
-                        Text("up"),
-                      ],
-                    ),
+                  child: Wrap(
+                    runSpacing: 10,
+                    children: [
+                      TextButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                            uparTarefa
+                                ? Colors.blue
+                                : const Color.fromARGB(240, 129, 128, 128),
+                          ),
+                          foregroundColor:
+                              MaterialStateProperty.all(Colors.white),
+                        ),
+                        onPressed: () {
+                          if (uparTarefa) {
+                            colorDel = Colors.blue;
+                            salvarTarefa = true;
+
+                            if (checkLv() < 1.0) {
+                              progress++;
+                            } else if (indexProgress < 2) {
+                              indexProgress++;
+                              progress = 0;
+                            } else if (indexProgress == 2) {
+                              //fazer animação pq ja ta todo upadasso
+                              uparTarefa = false;
+                            }
+                            setState(() {});
+                          }
+                        },
+                        child: Column(
+                          children: const [
+                            Icon(Icons.arrow_drop_up),
+                            Text("up"),
+                          ],
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () async {
+                          if (salvarTarefa) {
+                            colorDel = Colors.blue;
+                            await widget.repository.saveJson({
+                              "id": widget.id.toString(),
+                              "nome": widget.nome,
+                              "level": widget.lv.toString(),
+                              "url": widget.url,
+                              "progress": progress.toString(),
+                              "indexProgress": indexProgress.toString()
+                            }, "level${widget.id}");
+                            setState(() {
+                              salvarTarefa = false;
+                            });
+                          }
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                            salvarTarefa
+                                ? Colors.green
+                                : const Color.fromARGB(240, 129, 128, 128),
+                          ),
+                          foregroundColor:
+                              MaterialStateProperty.all(Colors.white),
+                        ),
+                        child: const Text("save"),
+                      ),
+                      TextButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                            colorDel,
+                          ),
+                          foregroundColor:
+                              MaterialStateProperty.all(Colors.white),
+                        ),
+                        onPressed: () async {
+                          if (deletarTarefa) {
+                            colorDel == Colors.blue
+                                ? colorDel = Colors.red
+                                : colorDel =
+                                    const Color.fromARGB(240, 129, 128, 128);
+
+                            if (colorDel ==
+                                const Color.fromARGB(240, 129, 128, 128)) {
+                              salvarTarefa = false;
+                              uparTarefa = false;
+                              deletarTarefa = false;
+                              await widget.repository
+                                  .saveJson({"id": "-1"}, "level${widget.id}");
+                            }
+                            setState(() {});
+                          }
+                        },
+                        child: const Text("Del"),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -148,9 +237,7 @@ class Task extends State<MyTask> {
                   width: size.width * 0.6,
                   child: LinearProgressIndicator(
                     color: Colors.white,
-                    value: progress /
-                        widget.lv /
-                        (2 * widget.lv * ((indexProgress + 1) * 5)),
+                    value: checkLv(),
                   ),
                 ),
                 SizedBox(

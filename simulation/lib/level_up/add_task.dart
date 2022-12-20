@@ -116,7 +116,7 @@ class NewTask extends State<AddTask> {
                                     keyboardType: TextInputType.name,
                                     inputFormatters: [
                                       FilteringTextInputFormatter.allow(
-                                          RegExp('[a-z,A-Z,0-9,@,!,\$,% ]'))
+                                          RegExp('[a-z,A-Z,0-9,@,!,\$,%,&, ]'))
                                     ],
                                     maxLength: 20,
                                     decoration: formDecoration(),
@@ -296,6 +296,7 @@ class NewTask extends State<AddTask> {
                                   index++;
 
                                   if (await widget.repository.saveJson({
+                                    "id": index.toString(),
                                     "nome": nome.text,
                                     "level": level.text,
                                     "url": url.text,
@@ -304,14 +305,14 @@ class NewTask extends State<AddTask> {
                                   }, "level$index")) {
                                     await widget.repository
                                         .saveInt(index, "level");
-                                    print(await widget.repository
-                                        .loadJson("level$index"));
                                   }
                                   // ignore: use_build_context_synchronously
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
                                           content: Text(
-                                              "Tarefa adicionada: ${nome.text}")));
+                                    "Tarefa adicionada: ${nome.text}",
+                                    textAlign: TextAlign.center,
+                                  )));
                                   // ignore: use_build_context_synchronously
                                   Navigator.pop(context);
                                 }
@@ -319,11 +320,8 @@ class NewTask extends State<AddTask> {
                               child: const Text("Salvar Tarefa"),
                             ),
                           ),
-                          Visibility(
-                            visible: urlValidate,
-                            child: SizedBox(
-                              height: size.width * 0.08,
-                            ),
+                          SizedBox(
+                            height: size.width * 0.08,
                           ),
                         ],
                       ),
