@@ -242,7 +242,7 @@ class Task extends State<MyTask> {
                 ),
                 SizedBox(
                   width: size.width * 0.2,
-                  child: Text("Nível: $progress"),
+                  child: Text("Nível: ${progress.toStringAsFixed(0)}"),
                 )
               ],
             ),

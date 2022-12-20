@@ -101,7 +101,7 @@ class NewTask extends State<AddTask> {
                               ),
                               SizedBox(
                                 width: size.width * 0.7,
-                                height: 80,
+                                height: 110,
                                 child: Padding(
                                   padding: const EdgeInsets.only(top: 22),
                                   child: TextFormField(
@@ -116,7 +116,7 @@ class NewTask extends State<AddTask> {
                                     keyboardType: TextInputType.name,
                                     inputFormatters: [
                                       FilteringTextInputFormatter.allow(
-                                          RegExp('[a-z,A-Z,0-9,@,!,\$,%,&, ]'))
+                                          RegExp('[a-z,A-Z,0-9,@,!,\$,%,&,*,-, ]'))
                                     ],
                                     maxLength: 20,
                                     decoration: formDecoration(),
