@@ -8,7 +8,9 @@ import '../repository/repository.dart';
 /// É como se fosse "tarefa10"
 
 class AddTask extends StatefulWidget {
-  const AddTask({super.key, required this.repository});
+  const AddTask(
+      {super.key, required this.repository, required this.controllerNotifier});
+  final Function controllerNotifier;
   final Repository repository;
 
   @override
@@ -115,8 +117,8 @@ class NewTask extends State<AddTask> {
                                     controller: nome,
                                     keyboardType: TextInputType.name,
                                     inputFormatters: [
-                                      FilteringTextInputFormatter.allow(
-                                          RegExp('[a-z,A-Z,0-9,@,!,\$,%,&,*,-, ]'))
+                                      FilteringTextInputFormatter.allow(RegExp(
+                                          '[a-z,A-Z,0-9,@,!,\$,%,&,*,-, ]'))
                                     ],
                                     maxLength: 20,
                                     decoration: formDecoration(),
@@ -306,6 +308,7 @@ class NewTask extends State<AddTask> {
                                     await widget.repository
                                         .saveInt(index, "level");
                                   }
+                                  await widget.controllerNotifier();
                                   // ignore: use_build_context_synchronously
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(SnackBar(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simulation/level_up/add_task.dart';
 import 'package:simulation/level_up/look_controller.dart';
 
 class LevelUpScreen extends StatelessWidget {
@@ -44,7 +45,12 @@ class LevelUpScreen extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            Navigator.pushNamed(context, "addTask");
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AddTask(
+                        repository: controller.repository,
+                        controllerNotifier: controller.loadTarefas)));
           },
           child: const Text("Adicionar tarefa"),
         ),

@@ -27,7 +27,6 @@ class LookController extends ChangeNotifier {
         "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_1.jpg",
         "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Shyvana_8.jpg"
       ];
-      print(urlFixo.length);
       await repository.saveInt(0, "level");
       for (int i = 0; i < urlFixo.length; i++) {
         index++;
@@ -55,6 +54,7 @@ class LookController extends ChangeNotifier {
       if (int.parse(json["id"] ?? "-1") == -1) continue;
 
       levelUp.add(MyTask(
+        loadTarefas: loadTarefas,
         repository: repository,
         id: int.parse(json["id"].toString()),
         nome: json["nome"],
