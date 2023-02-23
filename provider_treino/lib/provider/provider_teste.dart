@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider_treino/components/button_soma.dart';
-import 'package:provider_treino/components/circular_progress.dart';
-import 'package:provider_treino/components/text_number.dart';
+import 'package:provider_treino/provider/button_soma.dart';
+import 'package:provider_treino/provider/circular_progress.dart';
+import 'package:provider_treino/provider/text_number.dart';
 
 class ProviderTeste extends StatelessWidget {
   const ProviderTeste({super.key});
