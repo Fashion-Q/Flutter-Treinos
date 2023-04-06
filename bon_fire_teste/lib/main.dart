@@ -16,16 +16,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Game(),
+      home: const MyHomePage(),
     );
   }
 }
 
-class Game extends StatelessWidget {
-  const Game({super.key});
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BonfireTiledWidget(map: TiledWorldMap('mapa.json'));
+    return BonfireTiledWidget(map: TiledWorldMap('map/island.tmj'),);
   }
 }
