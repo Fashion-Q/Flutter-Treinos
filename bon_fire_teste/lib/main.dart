@@ -16,8 +16,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: const MMyHomePage(),
     );
+  }
+}
+
+class MMyHomePage extends StatelessWidget {
+  const MMyHomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BonfireWidget(map: WorldMapByTiled('maps/teste123_atual.json'));
   }
 }
 
@@ -26,6 +35,10 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BonfireTiledWidget(map: TiledWorldMap('map/island.tmj'),);
+    return Scaffold(
+      body: Center(
+        child: Image.asset("assets/images/maps/forest.png"),
+      ),
+    );
   }
 }
