@@ -1,7 +1,16 @@
+import 'package:bon_fire_teste/globals.dart';
+import 'package:bon_fire_teste/monstro/orc.dart';
+import 'package:bon_fire_teste/personagem/personagem.dart';
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.landscapeRight,
+  ]);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   runApp(const MyApp());
 }
 
@@ -16,28 +25,52 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MMyHomePage(),
+      home: const MyHomePage(),
     );
-  }
-}
-
-class MMyHomePage extends StatelessWidget {
-  const MMyHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BonfireWidget(map: WorldMapByTiled('maps/teste123_atual.json'));
   }
 }
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Image.asset("assets/images/maps/forest.png"),
+    return BonfireWidget(
+      player: Personagem(
+        Vector2(1 * tileSize, 4 * tileSize),
+      ),
+      showCollisionArea: false,
+      lightingColorGame: Colors.black.withOpacity(0.5),
+      map: WorldMapByTiled(
+        'maps/true_map.json',
+        forceTileSize: Vector2(tileSize, tileSize),
+        objectsBuilder: {
+          'orc': (properties) => Orc(
+                properties.position,
+              ),
+        },
+      ),
+      joystick: Joystick(
+        directional: JoystickDirectional(
+          color: Colors.purple,
+          margin: const EdgeInsets.only(left: 70, bottom: 70),
+          size: 80,
+        ),
+        actions: [
+          JoystickAction(
+            actionId: 1,
+            color: Colors.orangeAccent,
+            margin: const EdgeInsets.only(right: 10, bottom: 20),
+            size: 50,
+          ),
+        ],
+        keyboardConfig: KeyboardConfig(
+          keyboardDirectionalType: KeyboardDirectionalType.wasd,
+        ),
+      ),
+      cameraConfig: CameraConfig(
+        moveOnlyMapArea: true,
+        zoom: 1.5,
+        //sizeMovementWindow: Vector2(tileSize * 4,tileSize * 4),
       ),
     );
   }
