@@ -1,6 +1,7 @@
 import 'package:bon_fire_teste/monstro/orc_sprite_sheet.dart';
+import 'package:bon_fire_teste/skill/skills.dart';
 import 'package:bonfire/bonfire.dart';
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
 class Orc extends SimpleEnemy with ObjectCollision, UseBarLife {
   bool controlMove = true;
@@ -27,9 +28,11 @@ class Orc extends SimpleEnemy with ObjectCollision, UseBarLife {
   @override
   void update(double dt) {
     //enableCollision(true/false);
-    if (controlMove) {
+    if (controlMove && !canDie) {
       seeAndMoveToPlayer(
-        closePlayer: (player) {},
+        closePlayer: (player) {
+          executeAttack();
+        },
         radiusVision: 80,
         margin: 4,
       );
@@ -37,40 +40,64 @@ class Orc extends SimpleEnemy with ObjectCollision, UseBarLife {
     super.update(dt);
   }
 
-  @override
-  void die() async {
-    while (controlMove == false) {
-      await Future.delayed(
-        const Duration(milliseconds: 10),
-      );
-    }
-    controlMove = false;
-    animation?.playOnce(
-      OrcSpritSheet.dieRight,
-      onFinish: () {
-        removeFromParent();
-      },
+  void executeAttack() {
+    simpleAttackMelee(
+      damage: 20,
+      size: Vector2(32, 32),
+      sizePush: 10,
+      animationRight: CorteBranco.cortebrancoRight,
     );
-    super.die();
   }
 
+  bool canReceiveDamage = true;
+
   @override
-  void receiveDamage(AttackFromEnum attacker, double damage, identify) async {
-    if (controlMove) {
+  void receiveDamage(AttackFromEnum attacker, double damage, identify) {
+    if (canReceiveDamage && !canDie && AttackFromEnum.ENEMY != attacker) {
+      cont++;
+      canReceiveDamage = false;
+      if (life - damage <= 0) {
+        controlMove = false;
+        canDie = true;
+      }
       super.receiveDamage(attacker, damage, identify);
+      //lastDirectionHorizontal == Direction.right
+      if (controlMove) {
+        controlMove = false;
+        animation?.playOnce(
+          OrcSpritSheet.reciveDamageRight,
+          onFinish: () {
+            controlMove = true;
+          },
+          flipX: lastDirectionHorizontal == Direction.right ? false : true,
+        );
+      }
+      canReceiveDamage = true;
     }
-    cont++;
-    debugPrint("$cont $controlMove");
-    if (lastDirectionHorizontal == Direction.right || controlMove && life > 0) {
+  }
+
+  bool canDie = false;
+  bool forceRemove = true;
+  @override
+  void die() {
+    Future.delayed(const Duration(milliseconds: 2000), () {
+      if (forceRemove) {
+        removeFromParent();
+      }
+    });
+    if (canDie) {
       controlMove = false;
+
       animation?.playOnce(
-        OrcSpritSheet.reciveDamageRight,
+        OrcSpritSheet.dieRight,
         onFinish: () {
-          controlMove = true;
+          removeFromParent();
+          forceRemove = false;
         },
-        runToTheEnd: true,
+        flipX: lastDirectionHorizontal == Direction.right ? false : true,
       );
     }
+    super.die();
   }
 
   int cont = 0;
