@@ -10,21 +10,21 @@ import 'package:bon_fire_teste/testes/rena.dart';
 // import 'package:bon_fire_teste/ui/helpers/helper_page.dart';
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-// import 'package:desktop_window/desktop_window.dart';
+// import 'package:flutter/services.dart';
+import 'package:desktop_window/desktop_window.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.landscapeRight,
-    DeviceOrientation.landscapeLeft,
-  ]);
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
-
   // WidgetsFlutterBinding.ensureInitialized();
-  // await DesktopWindow.setWindowSize(const Size(600, 380));
-  // await DesktopWindow.setMinWindowSize(const Size(600, 380));
-  // await DesktopWindow.setMaxWindowSize(const Size(600, 380));
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.landscapeRight,
+  //   DeviceOrientation.landscapeLeft,
+  // ]);
+  // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await DesktopWindow.setWindowSize(const Size(600, 380));
+  await DesktopWindow.setMinWindowSize(const Size(600, 380));
+  await DesktopWindow.setMaxWindowSize(const Size(600, 380));
   runApp(const MyApp());
 }
 
