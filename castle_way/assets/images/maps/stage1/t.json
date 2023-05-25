@@ -1,0 +1,14 @@
+{ "columns":224,
+ "image":"Mossy - TileSet.png",
+ "imageheight":3584,
+ "imagewidth":3584,
+ "margin":0,
+ "name":"Mossy - TileSet",
+ "spacing":0,
+ "tilecount":50176,
+ "tiledversion":"1.10.0",
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset",
+ "version":"1.10"
+}

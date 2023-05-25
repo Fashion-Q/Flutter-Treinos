@@ -1,0 +1,14 @@
+{ "columns":34,
+ "image":"..\/..\/teste\/castle4.png",
+ "imageheight":458,
+ "imagewidth":544,
+ "margin":0,
+ "name":"castle4",
+ "spacing":0,
+ "tilecount":952,
+ "tiledversion":"1.10.0",
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset",
+ "version":"1.10"
+}
